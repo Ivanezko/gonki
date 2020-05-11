@@ -13,7 +13,9 @@ Create a readme file.
 */
 
 import (
+	"github.com/ilyakaznacheev/cleanenv"
 	"log"
+	"main/internal/config"
 	"main/internal/myhttp"
 	"os"
 	"sync"
@@ -22,6 +24,15 @@ import (
 func init() {
 	log.SetOutput(os.Stdout)
 	log.SetFlags(log.Lshortfile | log.Ldate | log.Ltime | log.Lmicroseconds)
+	if _, err := os.Stat("config.yml"); err == nil {
+		err := cleanenv.ReadConfig("config.yml", &config.Server)
+		if err != nil {
+			log.Fatal(err)
+		}
+	} else {
+		log.Print(err)
+		log.Print("config.yml not found. hope everything is in env?")
+	}
 }
 
 func main() {

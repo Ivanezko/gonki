@@ -1,7 +1,6 @@
 package myhttp
 
 import (
-	"github.com/ilyakaznacheev/cleanenv"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"log"
@@ -20,13 +19,7 @@ func httpHealth(c echo.Context) error {
 func Server(wg *sync.WaitGroup) {
 	defer wg.Done()
 
-	cfg := config.Server{}
-	err := cleanenv.ReadConfig("config.yml", &cfg)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	serverBind := cfg.Host + ":" + cfg.Port
+	serverBind := config.Server.Host + ":" + config.Server.Port
 	e := echo.New()
 	e.HideBanner = false
 	e.Use(middleware.Recover()) // recovers from panics
