@@ -1,7 +1,6 @@
 ![CI](https://github.com/Ivanezko/gonki/workflows/CI/badge.svg?branch=master)
 [![Go Report Card](https://goreportcard.com/badge/github.com/Ivanezko/gonki)](https://goreportcard.com/report/github.com/Ivanezko/gonki)
 [![Coverage Status](https://codecov.io/github/Ivanezko/gonki/coverage.svg?branch=master)](https://codecov.io/gh/Ivanezko/gonki)
-[![License](https://img.shields.io/github/license/Ivanezko/gonki.svg)](https://github.com/Ivanezko/gonki/blob/master/LICENSE)
 
 
 ###config
