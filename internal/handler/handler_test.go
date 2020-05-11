@@ -1,10 +1,11 @@
-package handler
+package handler_test
 
 import (
 	"github.com/labstack/echo/v4"
 	"github.com/stretchr/testify/assert"
 	"main/internal/api"
 	"main/internal/api/mocks"
+	"main/internal/handler"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -23,13 +24,14 @@ func TestHandler_Joke(t *testing.T) {
 			joke:     &api.JokeResponse{Joke: "test joke"},
 			err:      nil,
 			codeWant: http.StatusOK,
-			bodyWant: "test joke\n",
+			bodyWant: "test joke",
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			apiMock := mocks.Client{}
 			apiMock.On("GetJoke").Return(tt.joke, tt.err)
+			h := handler.NewHandler(&apiMock)
 
 			e := echo.New()
 			req := httptest.NewRequest(http.MethodGet, "/", nil)
@@ -37,7 +39,6 @@ func TestHandler_Joke(t *testing.T) {
 			c := e.NewContext(req, rec)
 			c.SetPath("/joke")
 
-			h := NewHandler(&apiMock)
 			/*
 				req, _ := http.NewRequest("GET", "/joke", nil)
 				rr := httptest.NewRecorder()
@@ -47,7 +48,7 @@ func TestHandler_Joke(t *testing.T) {
 			*/
 			if assert.NoError(t, h.Joke(c)) {
 				assert.Equal(t, tt.codeWant, rec.Code)
-				//assert.Equal(t, userJSON, rec.Body.String())
+				assert.Equal(t, tt.bodyWant, rec.Body.String())
 			}
 		})
 	}

@@ -18,5 +18,8 @@ https://github.com/vektra/mockery
 
 ./mockery -name=Client -dir=internal/api -output=internal/api/mocks
 
+go test ./...
+
+
 
 
