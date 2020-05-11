@@ -1,9 +1,6 @@
 ![CI](https://github.com/Ivanezko/gonki/workflows/CI/badge.svg?branch=master)
-[![GoDoc](https://godoc.org/github.com/Ivanezko/gonki?status.svg)](https://godoc.org/github.com/Ivanezko/gonki)
 [![Go Report Card](https://goreportcard.com/badge/github.com/Ivanezko/gonki)](https://goreportcard.com/report/github.com/Ivanezko/gonki)
 [![Coverage Status](https://codecov.io/github/Ivanezko/gonki/coverage.svg?branch=master)](https://codecov.io/gh/Ivanezko/gonki)
-[![Build Status](https://travis-ci.org/Ivanezko/gonki.svg?branch=master)](https://travis-ci.org/Ivanezko/gonki)
-[![Release](https://img.shields.io/github/release/Ivanezko/gonki.svg)](https://github.com/Ivanezko/gonki/releases/)
 [![License](https://img.shields.io/github/license/Ivanezko/gonki.svg)](https://github.com/Ivanezko/gonki/blob/master/LICENSE)
 
 
