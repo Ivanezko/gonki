@@ -1,8 +1,8 @@
 package myhttp
 
 import (
-	"github.com/labstack/echo"
-	"github.com/labstack/echo/middleware"
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 	"log"
 	"main/internal/api/jokes"
 	"main/internal/config"

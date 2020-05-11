@@ -3,12 +3,10 @@ module main
 go 1.14
 
 require (
-	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
+	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/ilyakaznacheev/cleanenv v1.2.3
-	github.com/joho/godotenv v1.3.0
-	github.com/labstack/echo v3.3.10+incompatible
-	github.com/labstack/gommon v0.3.0 // indirect
-	github.com/stretchr/testify v1.5.1 // indirect
-	github.com/valyala/fasttemplate v1.1.0 // indirect
+	github.com/labstack/echo/v4 v4.1.16
+	github.com/stretchr/objx v0.1.1 // indirect
+	github.com/stretchr/testify v1.5.1
 	golang.org/x/crypto v0.0.0-20200510223506-06a226fb4e37 // indirect
 )

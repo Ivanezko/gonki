@@ -14,4 +14,9 @@ https://www.youtube.com/watch?v=UTWIskmGN5o
 
 
 
+https://github.com/vektra/mockery
+
+./mockery -name=Client -dir=internal/api -output=internal/api/mocks
+
+
 
