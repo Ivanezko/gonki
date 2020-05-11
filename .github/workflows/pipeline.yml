@@ -16,7 +16,7 @@ jobs:
 
   deploy:
     name: Deploy to heroku
-    run-on: ubuntu-latest
+    runs-on: ubuntu-latest
     needs:
       - lint
     steps:
