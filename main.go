@@ -13,10 +13,11 @@ Create a readme file.
 */
 
 import (
+	"context"
 	"github.com/ilyakaznacheev/cleanenv"
 	"log"
 	"main/internal/config"
-	"main/internal/myhttp"
+	"main/internal/httpserver"
 	"os"
 	"sync"
 )
@@ -37,9 +38,10 @@ func init() {
 }
 
 func main() {
+	ctx := context.Background() // root context
 	var wg sync.WaitGroup
 	wg.Add(1)
-	go myhttp.Server(&wg)
+	go httpserver.Worker(ctx, &wg)
 	wg.Wait()
 	log.Println("app end")
 }
