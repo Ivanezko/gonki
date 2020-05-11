@@ -14,7 +14,6 @@ Create a readme file.
 
 import (
 	"log"
-	"main/cmd/env"
 	"main/internal/myhttp"
 	"os"
 	"sync"
@@ -26,8 +25,6 @@ func init() {
 }
 
 func main() {
-
-	log.Print(".env file found. version: ", env.Get("version"))
 
 	var wg sync.WaitGroup
 	wg.Add(1)

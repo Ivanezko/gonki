@@ -6,6 +6,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -mod=readonly -v -o server
 FROM ubuntu
 #RUN apt-get update && apt-get install -y chromium-browser
 COPY --from=builder /build/server /
+COPY --from=builder /build/config.yml /
 #ADD .env /
 EXPOSE 2022
 RUN chmod +x /server
