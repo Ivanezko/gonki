@@ -24,6 +24,7 @@ import (
 func init() {
 	log.SetOutput(os.Stdout)
 	log.SetFlags(log.Lshortfile | log.Ldate | log.Ltime | log.Lmicroseconds)
+
 	if _, err := os.Stat("config.yml"); err == nil {
 		err := cleanenv.ReadConfig("config.yml", &config.Server)
 		if err != nil {

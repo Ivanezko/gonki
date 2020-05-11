@@ -7,7 +7,7 @@ FROM ubuntu
 #RUN apt-get update && apt-get install -y chromium-browser
 COPY --from=builder /build/server /
 COPY --from=builder /build/config.yml /
-#ADD .env /
+ADD config.yml /
 EXPOSE 2022
 RUN chmod +x /server
 ENTRYPOINT ["/server"]
