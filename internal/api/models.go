@@ -1,6 +1,6 @@
 package api
 
-// JokeResponse
+// JokeResponse - response structure
 type JokeResponse struct {
 	Joke string `json:"joke"`
 }

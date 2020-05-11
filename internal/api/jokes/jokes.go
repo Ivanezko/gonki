@@ -14,12 +14,14 @@ type JokeClient struct {
 	url string
 }
 
+// NewJokeClient - creates new client
 func NewJokeClient(baseURL string) *JokeClient {
 	return &JokeClient{
 		url: baseURL,
 	}
 }
 
+// GetJoke - get joke
 func (jc *JokeClient) GetJoke() (*api.JokeResponse, error) {
 	urlPath := jc.url + getJokePath
 

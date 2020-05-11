@@ -8,4 +8,5 @@ type server struct {
 	JokeURL string `yaml:"joke-url" env:"JOKE_URL"`
 }
 
+// Server - config container
 var Server server

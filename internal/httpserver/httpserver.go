@@ -13,6 +13,7 @@ import (
 	"time"
 )
 
+// ServerContext - custom context
 type ServerContext struct {
 	echo.Context
 }
