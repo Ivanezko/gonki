@@ -20,6 +20,7 @@ func NewHandler(jokeClient api.Client) *Handler {
 func (h *Handler) Joke(c echo.Context) error {
 	joke, err := h.jokeClient.GetJoke()
 	if err != nil {
+		log.Print(err)
 		return c.HTML(http.StatusInternalServerError, "oops")
 	}
 
