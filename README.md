@@ -1,4 +1,6 @@
 ###config
+https://github.com/ilyakaznacheev/cleanenv
+
 config.yml
 
 ###local run
@@ -9,5 +11,7 @@ docker-compose up
 autodeploy on push to master
 
 https://www.youtube.com/watch?v=UTWIskmGN5o
+
+
 
 

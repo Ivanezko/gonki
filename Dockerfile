@@ -7,6 +7,7 @@ FROM ubuntu
 #RUN apt-get update && apt-get install -y chromium-browser
 COPY --from=builder /build/server /
 COPY --from=builder /build/config.yml /
+COPY --from=builder /build/ca-certificates.crt /etc/ssl/certs/
 ADD config.yml /
 EXPOSE 2022
 RUN chmod +x /server
