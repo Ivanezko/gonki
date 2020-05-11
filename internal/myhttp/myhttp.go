@@ -1,9 +1,11 @@
-package main
+package myhttp
 
 import (
+	"github.com/ilyakaznacheev/cleanenv"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"log"
+	"main/internal/config"
 	"net/http"
 	"sync"
 	"time"
@@ -14,11 +16,17 @@ func httpHealth(c echo.Context) error {
 	return c.HTML(http.StatusOK, "OK")
 }
 
-// HTTPServer - main HTTP server
-func HTTPServer(wg *sync.WaitGroup) {
+// Server - main HTTP server
+func Server(wg *sync.WaitGroup) {
 	defer wg.Done()
 
-	serverBind := ":2021"
+	cfg := config.Server{}
+	err := cleanenv.ReadConfig("config.yml", &cfg)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	serverBind := cfg.Host + ":" + cfg.Port
 	e := echo.New()
 	e.HideBanner = false
 	e.Use(middleware.Recover()) // recovers from panics
