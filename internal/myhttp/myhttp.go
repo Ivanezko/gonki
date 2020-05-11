@@ -4,26 +4,28 @@ import (
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"log"
+	"main/internal/api/jokes"
 	"main/internal/config"
+	"main/internal/handler"
 	"net/http"
 	"sync"
 	"time"
 )
 
-func httpHealth(c echo.Context) error {
-	log.Print("health requested")
-	return c.HTML(http.StatusOK, "OK")
-}
-
 // Server - main HTTP server
 func Server(wg *sync.WaitGroup) {
 	defer wg.Done()
+
+	apiClient := jokes.NewJokeClient(config.Server.JokeURL)
+
+	h := handler.NewHandler(apiClient)
 
 	serverBind := config.Server.Host + ":" + config.Server.Port
 	e := echo.New()
 	e.HideBanner = false
 	e.Use(middleware.Recover()) // recovers from panics
-	e.GET("/health", httpHealth)
+	e.GET("/health", handler.Health)
+	e.GET("/joke", h.Joke)
 	log.Print("Start HTTP server on host: " + serverBind)
 	s := &http.Server{
 		Addr:         serverBind,
