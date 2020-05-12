@@ -12,6 +12,7 @@ import (
 	"time"
 )
 
+// EchoServer - http server
 var EchoServer *echo.Echo
 
 // ServerContext - custom context
@@ -27,7 +28,7 @@ func Worker(ctx context.Context) {
 
 	h := handler.NewHandler(apiClient)
 
-	serverBind := config.Http.Host + ":" + config.Http.Port
+	serverBind := config.HTTP.Host + ":" + config.HTTP.Port
 
 	EchoServer = echo.New()
 	EchoServer.HideBanner = false

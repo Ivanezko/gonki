@@ -16,21 +16,24 @@ type jokeapp struct {
 	JokeURL string `yaml:"joke-url" env:"JOKE_URL" env-description:"Joke URL"`
 }
 
-var Http http
+// HTTP - stcruct for HTTP server configs
+var HTTP http
+
+// JokeApp - struct for JokeApp configs
 var JokeApp jokeapp
 
 // Init - loads configs
 func Init() {
 	if _, err := os.Stat("config.yml"); err == nil {
 		{
-			err := cleanenv.ReadConfig("config.yml", &Http)
+			err := cleanenv.ReadConfig("config.yml", &HTTP)
 			if err != nil {
 				log.Fatal(err)
 			}
-			log.Printf("loaded config Http:%+v", Http)
+			log.Printf("loaded config HTTP:%+v", HTTP)
 		}
 		{
-			err := cleanenv.ReadConfig("config.yml", &Http)
+			err := cleanenv.ReadConfig("config.yml", &HTTP)
 			if err != nil {
 				log.Fatal(err)
 			}

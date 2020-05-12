@@ -25,12 +25,12 @@ func Main() {
 
 	// Wait for interrupt signal to gracefully shutdown the server with
 	// a timeout of 10 seconds.
-	quit := make(chan os.Signal)
+	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, os.Interrupt)
 
 	<-quit // wait for quit here...
-	log.Printf("Gracefull HTTP server shutdown max %d sec...", config.Http.GracefulShutdownTimeout)
-	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(config.Http.GracefulShutdownTimeout)*time.Second)
+	log.Printf("Gracefull HTTP server shutdown max %d sec...", config.HTTP.GracefulShutdownTimeout)
+	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(config.HTTP.GracefulShutdownTimeout)*time.Second)
 	defer func() {
 		log.Print("HTTP server stopped")
 		cancel()
