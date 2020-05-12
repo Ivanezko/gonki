@@ -9,9 +9,10 @@ import (
 	"main/internal/config"
 	"main/internal/handler"
 	"net/http"
-	"sync"
 	"time"
 )
+
+var EchoServer *echo.Echo
 
 // ServerContext - custom context
 type ServerContext struct {
@@ -19,31 +20,30 @@ type ServerContext struct {
 }
 
 // Worker - main HTTP server
-func Worker(ctx context.Context, wg *sync.WaitGroup) {
+func Worker(ctx context.Context) {
 	_ = ctx
-	defer wg.Done()
 
-	apiClient := jokes.NewJokeClient(config.Server.JokeURL)
+	apiClient := jokes.NewJokeClient(config.JokeApp.JokeURL)
 
 	h := handler.NewHandler(apiClient)
 
-	serverBind := config.Server.Host + ":" + config.Server.Port
+	serverBind := config.Http.Host + ":" + config.Http.Port
 
-	e := echo.New()
-	e.HideBanner = false
+	EchoServer = echo.New()
+	EchoServer.HideBanner = false
 
-	e.Use(func(next echo.HandlerFunc) echo.HandlerFunc {
+	EchoServer.Use(func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
 			cc := &ServerContext{c}
 			return next(cc)
 		}
 	})
 
-	e.Static("/", "assets")
-	e.Use(middleware.Recover()) // recovers from panics
+	EchoServer.Static("/", "assets")
+	EchoServer.Use(middleware.Recover()) // recovers from panics
 
-	e.GET("/health", handler.Health)
-	e.GET("/joke", h.Joke)
+	EchoServer.GET("/health", handler.Health)
+	EchoServer.GET("/joke", h.Joke)
 
 	log.Print("Start HTTP server on addr: " + serverBind)
 	s := &http.Server{
@@ -51,5 +51,5 @@ func Worker(ctx context.Context, wg *sync.WaitGroup) {
 		ReadTimeout:  30 * time.Second,
 		WriteTimeout: 30 * time.Second,
 	}
-	e.Logger.Fatal(e.StartServer(s))
+	EchoServer.Logger.Fatal(EchoServer.StartServer(s))
 }
