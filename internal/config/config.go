@@ -33,7 +33,7 @@ func Init() {
 			log.Printf("loaded config HTTP:%+v", HTTP)
 		}
 		{
-			err := cleanenv.ReadConfig("config.yml", &HTTP)
+			err := cleanenv.ReadConfig("config.yml", &JokeApp)
 			if err != nil {
 				log.Fatal(err)
 			}
