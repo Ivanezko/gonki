@@ -28,7 +28,9 @@ func Worker(ctx context.Context, wg *sync.WaitGroup) {
 	h := handler.NewHandler(apiClient)
 
 	serverBind := config.Server.Host + ":" + config.Server.Port
+
 	e := echo.New()
+	e.HideBanner = false
 
 	e.Use(func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
@@ -37,11 +39,13 @@ func Worker(ctx context.Context, wg *sync.WaitGroup) {
 		}
 	})
 
-	e.HideBanner = false
+	e.Static("/", "assets")
 	e.Use(middleware.Recover()) // recovers from panics
+
 	e.GET("/health", handler.Health)
 	e.GET("/joke", h.Joke)
-	log.Print("Start HTTP server on host: " + serverBind)
+
+	log.Print("Start HTTP server on addr: " + serverBind)
 	s := &http.Server{
 		Addr:         serverBind,
 		ReadTimeout:  30 * time.Second,
