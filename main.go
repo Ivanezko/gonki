@@ -15,7 +15,6 @@ Create a readme file.
 import (
 	"context"
 	"github.com/ilyakaznacheev/cleanenv"
-	"github.com/labstack/echo/v4"
 	"log"
 	"main/internal/config"
 	"main/internal/httpserver"
